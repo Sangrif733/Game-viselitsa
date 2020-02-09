@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        let words = ["мышка", "видео", "дрон", "транспорт", "программа", "робот", "планктон", "ютуб", "ролики"];
+        let randomIndex = Math.floor(Math.random() * words.length);
+
+        let word = words[randomIndex];
+
+        let attempts = word.length + 5;
+
+        let answerArray = [];
+
+        while (answerArray.length < word.length) {
+            answerArray.push("_");
+        }
+
+        let remainingLetters = answerArray.length;
+
+        while (remainingLetters > 0 && attempts > 0) {
+            // Основной код
+            // Показываем состояние игры
+            alert(answerArray.join(" ") + "\n\nОсталось " + attempts + " попыток.");
+
+            // Запрашиваем вариант ответа
+            let quess = prompt("Введите вариант ответа")
+            if (null === quess) {
+                break;
+            } else if (quess.length !== 1) {
+                alert("Введите одну букву.");
+            } else {
+                // Обновляем answerArray и remainingLetters для каждого вхождения угаданной буквы      
+                for (let i = 0; i < word.length; i++) {
+                    if (word[i].toLowerCase() === quess.toLowerCase() && answerArray[i] == "_") {
+                        answerArray[i] = word[i];
+                        remainingLetters--;
+                    }
+                }
+            }
+            //Конец игрового цикла
+            attempts = attempts - 1;
+        }
+        alert(answerArray.join(" "));
+        if (attempts > 0) { 
+//Отображаем ответ и поздравляем игрока
+            alert("Поздравляем было загадано слово: " + word);
+        }
+        else {
+            alert("Попытки закончились попробуй еще раз.\nДля новой игры перезагрузите страницу.")
+        }
+
+    </script>
+</body>
+
+</html>
